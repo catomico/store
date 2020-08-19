@@ -10,6 +10,8 @@ body {
   body {padding: 0 4rem;}
 }
 
+* { box-sizing: border-box;}
+
 /* see #root in index.css
 .app-wrapper {
   max-width: 1250px;
@@ -25,12 +27,5 @@ body {
 a {
   text-decoration: none;
   color: ghostwhite;
-  transition: all 1s ease;
-}
-
-a:hover {  
-  background: linear-gradient(to right, rgb(65,223,208),rgb(238,131,239));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  transition: all .6s ease;
 }

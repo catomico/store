@@ -27,6 +27,15 @@
 
     .opts {
       padding: 10px 10px 5px;
+      transition: all .6s ease;
+      cursor: pointer;
+    }
+
+    .opts:hover {  
+      background: linear-gradient(to right, rgb(65,223,208),rgb(238,131,239));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
 }
