@@ -1,5 +1,5 @@
 import React from 'react';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 import FormInput from '../form-input/form-input';
 import Button from '../../components/button/button';
@@ -17,10 +17,18 @@ class Login extends React.Component{
   }
 
   // although we set an initial empty state, the browser may still intervene therefore hit reset everytime.
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
-    this.setState({ email: '', password: '' })
-  }
+
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      this.setState({ email: '', password: '' })
+    } catch (error) {
+      console.log(error);
+    }    
+  };
 
   // now the change event can update the values that were just reset to empty strings
   // we are reusing this function for both email and password

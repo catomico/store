@@ -12,10 +12,10 @@ class Register extends React.Component {
 		super();
 
 		this.state = {
-				displayName: '',
-				email: '',
-				password: '',
-				confirmPassword: ''     
+			displayName: '',
+			email: '',
+			password: '',
+			confirmPassword: ''     
 		}
 	}
 
