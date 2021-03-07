@@ -7,7 +7,7 @@
   min-width: 30%;
   min-width: 300px;
   height: 240px;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, .2);
   overflow: hidden;
 
   &:hover {
@@ -19,7 +19,8 @@
     }
 
     & .contt {
-      opacity: 0.9;
+      border: 1px solid rgba(248, 248, 255, .45);
+      background-color: rgba(74, 74, 74, .7);
     }
   }
 
@@ -57,9 +58,9 @@
     justify-content: center;
     padding: 0 25px;
     height: 80px;
-    border: 1px solid ghostwhite;
-    background-color: #4a4a4a;
-    opacity: .75;
+    border: 1px solid rgba(248, 248, 255, .4);
+    background-color: rgba(74, 74, 74, .6);
+    // opacity: .75;
     position: absolute;
   
 
@@ -74,8 +75,8 @@
     .sbtl {
       padding: 0 15px;
       // border: 1px solid ghostwhite;
-      background-color: ghostwhite;
-      font-weight: lighter;
+      background-color: #f8f8ff;
+      font-weight: 300;
       font-size: 16px; 
       color: #4a4a4a;
       transform: translateY(16px);
