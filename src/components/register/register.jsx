@@ -89,7 +89,7 @@ class Register extends React.Component {
 						label='Confirm Password'
 						required
 					/>
-					<Button type='submit'> Register</Button>
+					<Button type='submit'>Register</Button>
 				</form>
 			</div>
 		);
