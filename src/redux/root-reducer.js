@@ -1,0 +1,2 @@
+// the root -reducer is a base reducer object that represents all the state of our app and will be the code that actually comines all the other states together
+// we are going to break the code up into individuals sections.

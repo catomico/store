@@ -4,15 +4,21 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
+import { Provider } from 'react-redux';
+// the provider is a compo that is a parent of everything inside our app
+// wraps our app and allows us to access to all the things related to the Redux store 
+
 import App from './App';
 import './index.css';
 
 ReactDOM.render(
+  <Provider>
     <React.StrictMode>
       <BrowserRouter>
           <App />
       </BrowserRouter>
-    </React.StrictMode>,
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
