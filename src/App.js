@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Header from './components/header/header';
 import HomePage from './pages/homepage/homepage.component';
@@ -7,6 +8,9 @@ import ShopPage from './pages/shop/shop.component';
 import Signings from './pages/logins/signings.jsx';
 //video 87 ... also convert app to class
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+
+import { setCurrentUser } from './redux/user/user.action';
+
 
 // import logo from './logo.svg';
 import './App.css';
@@ -77,7 +81,9 @@ class App extends React.Component {
     return (
       // <div className="app-wrapper"> see #root in index
       <div>
-        <Header currentUser={this.state.currentUser} />
+        {/* <Header currentUser={this.state.currentUser} /> */}
+        {/* after adding redux... and then finally mapstatetoprops we can move state to the header component */}
+        <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
@@ -87,7 +93,15 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+const mapDispatchToProps = () => {
+
+}
+
+
+// App.js does not need current user anymore. app only sets current user but does nothing with it. therefore put null as the first arg because don't need state for props from the user reducer
+// Here we are connecting the outcome of our initial connect call to 
+// export default App;
+export default connect(null)(App);
 
 
 
