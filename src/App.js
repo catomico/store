@@ -34,17 +34,21 @@ import './App.css';
 
 // switch renders only one route at a time 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      currentUser: null 
-    }
-  }
+  // we take state out after adding mapDispatchToProps with connect, because state now coomes from the reducer, also see userRef.onSnapshot(snapShot => {
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     currentUser: null 
+  //   }
+  // }
 
   // this section is the app listening for auth state chages,
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    // later when we know what the fuck is going on we can destructure
+    // const {setCurrentUser} = this.props;
+    
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       // this.setState({ currentUser: user });
       // createUserProfileDocument(user);
@@ -54,21 +58,26 @@ class App extends React.Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          // console.log(snapShot.data());
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
+          // console.log(snapShot.data()); ->1
+          // after adding mapDispatchToProps, we can remove the setState here - see how we have converted state to props
+          // this.setState({
+          this.props.setCurrentUser({
+            // currentUser: {
+            id: snapShot.id,
+            ...snapShot.data()
+            // }
           }
           // ,
           // () => {
-          //   console.log(this.state);
+          //   console.log(this.state); ->1
           // }
           )
         });
       } else {
-        this.setState({ currentUser: userAuth });
+          // after adding mapDispatchToProps, we can remove the setState here
+          // the old one is passing in an Object, but since its now props
+        // this.setState({ currentUser: userAuth });
+        this.props.setCurrentUser(userAuth);
       }
     })
   }
@@ -93,15 +102,15 @@ class App extends React.Component {
     );
   }
 }
-const mapDispatchToProps = () => {
-
-}
+const mapDispatchToProps = dispatch => ({
+   setCurrentUser: user => dispatch(setCurrentUser(user))
+});
 
 
 // App.js does not need current user anymore. app only sets current user but does nothing with it. therefore put null as the first arg because don't need state for props from the user reducer
 // Here we are connecting the outcome of our initial connect call to 
 // export default App;
-export default connect(null)(App);
+export default connect(null, mapDispatchToProps)(App);
 
 
 
