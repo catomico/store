@@ -1,12 +1,13 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './components/header/header';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import Signings from './pages/logins/signings.jsx';
-//video 87 ... also convert app to class
+
+//video 87 = Convert app to class
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.action';
@@ -33,8 +34,10 @@ import './App.css';
 // )
 
 // switch renders only one route at a time 
+
 class App extends React.Component {
-  // we take state out after adding mapDispatchToProps with connect, because state now coomes from the reducer, also see userRef.onSnapshot(snapShot => {
+  // Add mapDispatchToProps with connect and remove state.
+  // State now coomes from the reducer, also see userRef.onSnapshot(snapShot => {
   // constructor() {
   //   super();
   //   this.state = {
@@ -46,8 +49,8 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    // later when we know what the fuck is going on we can destructure
-    // const {setCurrentUser} = this.props;
+    // Remember to destructure
+    // const {setCurrentUser} = this.propss;
     
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       // this.setState({ currentUser: user });
@@ -58,8 +61,11 @@ class App extends React.Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          // console.log(snapShot.data()); ->1
-          // after adding mapDispatchToProps, we can remove the setState here - see how we have converted state to props
+          // console.log(snapShot.data());
+
+          // Add mapDispatchToProps, then remove setState. 
+          // Convert state to props, pass in snapShot Object from Firebase
+
           // this.setState({
           this.props.setCurrentUser({
             // currentUser: {
@@ -69,13 +75,15 @@ class App extends React.Component {
           }
           // ,
           // () => {
-          //   console.log(this.state); ->1
+          //   console.log(this.state);
           // }
           )
         });
       } else {
-          // after adding mapDispatchToProps, we can remove the setState here
-          // the old one is passing in an Object, but since its now props
+        // Add mapDispatchToProps, then remove setState.
+        // Prev. passed in an Object, but now use props
+        // Remember to destructure
+          
         // this.setState({ currentUser: userAuth });
         this.props.setCurrentUser(userAuth);
       }
@@ -91,29 +99,49 @@ class App extends React.Component {
       // <div className="app-wrapper"> see #root in index
       <div>
         {/* <Header currentUser={this.state.currentUser} /> */}
-        {/* after adding redux... and then finally mapstatetoprops we can move state to the header component */}
+        {/* Add Redux and mapStateToProps, then move state to header compo */}
         <Header />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
-          <Route path='/signin' component={Signings} />
+
+          {/* <Route path='/signin' component={Signings} /> */}
+          <Route exact path='/signin' 
+            render={() => 
+              this.props.currentUser ? (
+                <Redirect to='/' />
+              ) : (
+                <Signings />
+              )
+            } />
         </Switch>
       </div>
     );
   }
 }
+
+// Prevent logged in user from seeing login page with Redirect from React-Router Dom
+// Just like in Header compo
+//Off of state, destructure the user reducer with ({ user }), and return currentUser Props.
+// Then pass into the connect args below, so that Appjs can access.
+// Remember to destructure.
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
+ 
 const mapDispatchToProps = dispatch => ({
    setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
+// Put null as first arg = don't need state for props from user reducer
+// App.js doesn't need currentUser anymore, only sets currentUser but does nothing with it.
+// we now need to access props.currentUser "state" so pass in the mapStateToProps 
 
-// App.js does not need current user anymore. app only sets current user but does nothing with it. therefore put null as the first arg because don't need state for props from the user reducer
-// Here we are connecting the outcome of our initial connect call to 
 // export default App;
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-
-
+// Simple example of switch routing.
 // <Switch>
 // <Route exact path='/' component={HomePage} />
 // <Route path='/birds' component={BirdsPage} />

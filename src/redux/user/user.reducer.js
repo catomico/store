@@ -42,4 +42,4 @@ export default userReducer;
 // }
 
 // VIDEO 116
-// before now, the header component is getting the user value from app.js so change to have it take the value from the user reducer - > root reducer
+// before now, the header component is getting the user value from app.js so change to have it take the value from the user reducer - > root reducer => this.props.currentUser ?
