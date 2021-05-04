@@ -1,3 +1,18 @@
+// PROBLEM
+// when a user logs in with firebase the header component updates to add on a button called 'LOG OUT', but it does not remove the 'LOGIN' button, even though the redirect is in place to stop the user navigating to the Login page accidentally
+
+// PREFFERED OUTCOME
+// if the user is logged in, then the header compo should not display the login button
+
+// CURRENT OUTCOME
+// the state is not being updated
+
+// to update the state: action -> reducer -> props
+// if the current user is null then display the link or if current user is !null do not display the link
+
+
+
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.utils';
@@ -5,20 +20,22 @@ import { auth } from '../../firebase/firebase.utils';
 // connect is a higher order function, allows us to bring in the user reducer - see export line at bottom
 import { connect } from 'react-redux';
  
-// import { ReactComponent as Logo } from '../../assets/pets.svg';
 import { ReactComponent as Logo } from '../../assets/pets.svg';
 import './header.scss';
-import { app } from 'firebase';
 
 const Header = ({ currentUser }) => (
   <div className='header'>
     <Link className='logo-box' to="/">
       <Logo className='logo' />
     </Link>
-    <div className='opts-box'>
-      <Link className='opts' to="/signin">
+
+    <div className='opts-box'>      {
+        currentUser ? null
+        : <Link className='opts' to="/signin">LOGIN</Link>
+      }
+      {/* <Link className='opts' to="/signin">
         LOGIN
-      </Link>
+      </Link> */}
       <Link className='opts' to="/shop">
         SHOP
       </Link>
