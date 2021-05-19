@@ -10,9 +10,6 @@
 // to update the state: action -> reducer -> props
 // if the current user is null then display the link or if current user is !null do not display the link
 
-
-
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase/firebase.utils';
@@ -21,6 +18,7 @@ import { auth } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux';
  
 import { ReactComponent as Logo } from '../../assets/pets.svg';
+import CartIcon from '../cart-icon/cart-icon';
 import './header.scss';
 
 const Header = ({ currentUser }) => (
@@ -47,6 +45,7 @@ const Header = ({ currentUser }) => (
         <div className='opts' onClick={() => auth.signOut()}>LOG OUT</div>
         : <Link className='opts' to='./signin'></Link>
       }
+    <CartIcon />
     </div>
   </div>
 )
