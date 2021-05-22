@@ -19,6 +19,7 @@ import { connect } from 'react-redux';
  
 import { ReactComponent as Logo } from '../../assets/pets.svg';
 import CartIcon from '../cart-icon/cart-icon';
+import CartDown from '../cart-down/cart-down';
 import './header.scss';
 
 const Header = ({ currentUser }) => (
@@ -27,13 +28,14 @@ const Header = ({ currentUser }) => (
       <Logo className='logo' />
     </Link>
 
-    <div className='opts-box'>      {
+    <div className='opts-box'>      
+      {
         currentUser ? null
         : <Link className='opts' to="/signin">LOGIN</Link>
       }
-      {/* <Link className='opts' to="/signin">
-        LOGIN
-      </Link> */}
+          {/* <Link className='opts' to="/signin">
+                LOGIN
+              </Link> */}
       <Link className='opts' to="/shop">
         SHOP
       </Link>
@@ -45,8 +47,9 @@ const Header = ({ currentUser }) => (
         <div className='opts' onClick={() => auth.signOut()}>LOG OUT</div>
         : <Link className='opts' to='./signin'></Link>
       }
-    <CartIcon />
+      <CartIcon />
     </div>
+    <CartDown />
   </div>
 )
 
