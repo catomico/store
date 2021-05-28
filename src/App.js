@@ -131,7 +131,7 @@ const mapStateToProps = ({ user }) => ({
 
  
 const mapDispatchToProps = dispatch => ({
-   setCurrentUser: user => dispatch(setCurrentUser(user))
+  setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
 // Put null as first arg = don't need state for props from user reducer

@@ -22,7 +22,7 @@ import CartIcon from '../cart-icon/cart-icon';
 import CartDown from '../cart-down/cart-down';
 import './header.scss';
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, cartHidden }) => (
   <div className='header'>
     <Link className='logo-box' to="/">
       <Logo className='logo' />
@@ -33,29 +33,43 @@ const Header = ({ currentUser }) => (
         currentUser ? null
         : <Link className='opts' to="/signin">LOGIN</Link>
       }
+
           {/* <Link className='opts' to="/signin">
                 LOGIN
               </Link> */}
+
       <Link className='opts' to="/shop">
         SHOP
       </Link>
+
       <Link className='opts' to="/contact">
         CONTACT
       </Link>
+
       {
         currentUser ?
         <div className='opts' onClick={() => auth.signOut()}>LOG OUT</div>
         : <Link className='opts' to='./signin'></Link>
       }
+
       <CartIcon />
+
     </div>
-    <CartDown />
+   
+    { cartHidden ? null : <CartDown /> }
   </div>
 )
 
 // map state to props takes the state from the reducer and creates an object
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+// const mapStateToProps = state => ({
+//   currentUser: state.user.currentUser
+// });
+
+// when adding in the cart state, and cartHidden state, we must destructure, but this is a different/new way to destructure off of state. 
+// from state we want usre, from user, we want currentUser 
+const mapStateToProps = ({ user: { currentUser }, cart: { cartHidden } }) => ({
+  currentUser,
+  cartHidden
 });
 
 // we pass connect two functions (the second is optional) 
