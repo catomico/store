@@ -1,7 +1,7 @@
 // prev added User.Action.Types to the reducer to make sure that the action SET_CURRENT_USER only comes from one place, import add it here.
 // the UserActionTypes is imported so that it can be used here, then exported and picked up by the reducer
 
-import { UserActionTypes } from './user.types'
+import { UserActionTypes } from './user.types' 
 
 export const setCurrentUser = user => ({
   type: UserActionTypes.SET_CURRENT_USER,

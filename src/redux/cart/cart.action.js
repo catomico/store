@@ -7,6 +7,12 @@ export const toggleCartVisibility = visibility => ({
 });
 
 
+export const addItemsToCart = shopItem => ({
+  type: CartActionTypes.ADD_ITEMS,
+  payload: shopItem
+});
+
+
 // const is a variable
 // (inputProps) is to pass in some juicy inputProps
 // => () is a cool function .. that can render some jsx

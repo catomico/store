@@ -1,6 +1,8 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+
 import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.action';
 
 import Header from './components/header/header';
 import HomePage from './pages/homepage/homepage.component';
@@ -10,7 +12,6 @@ import Signings from './pages/logins/signings.jsx';
 //video 87 = Convert app to class
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
-import { setCurrentUser } from './redux/user/user.action';
 
 
 // import logo from './logo.svg';
