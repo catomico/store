@@ -3,17 +3,19 @@
 // remeber that cartItems already exists inside the cart reducer and it is a state object prop, and recievesba payload from cart actions.
 
 export const addMoreToCart = (cartItems, cartItemPlus) => {
-  const existingCartItem = cartItems.find(
+  const existingCartItem = cartItems.find(cartItemX => 
     cartItemX.id === cartItemPlus.id
   );
 
   if (existingCartItem) {
-    return cartItems.map(cartItems => 
+    return cartItems.map(cartItemX => 
       cartItemX.id === cartItemPlus.id 
-        ? {...cartItemX, ItemQuantity: ItemQuantity + 1}
+        ? { ...cartItemX, ItemQuantity: cartItemX.ItemQuantity + 1 }
         : cartItemX
-    )
+    );
   }
+
+  return [...cartItems, { ...cartItemPlus, ItemQuantity: 1 }]
 };
 
 // import nothing, just export a variable with a function
@@ -35,4 +37,6 @@ export const addMoreToCart = (cartItems, cartItemPlus) => {
 //But this assumes there is already a cart item in the cart, what if there is none, but we add a new one?
 
 //three
-// So if existing cart iten is not satisfied then return an array that has the other original cart items spread into it, and give it a new object which has the cart item to add spread in, and give it a base quantity of onemptied. This quantity property is created new and set to one
+// So if existing cart item is not satisfied then return an array that has the other original cart items spread into it, and give it a new object which has the cart item to add spread in, and give it a base quantity of onemptied. This quantity property is created new and set to one
+
+// finally do something with it, go import it into the reducer
