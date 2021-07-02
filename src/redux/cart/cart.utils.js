@@ -1,6 +1,6 @@
 // cart.utils is where to put any reusable functions relating to redux.
 
-// remeber that cartItems already exists inside the cart reducer and it is a state object prop, and recievesba payload from cart actions.
+// remeber that cartItems already exists inside the cart reducer and it is a state object prop, and recieves a payload from cart actions.
 
 export const addMoreToCart = (cartItems, cartItemPlus) => {
   const existingCartItem = cartItems.find(cartItemX => 
