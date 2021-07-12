@@ -7,10 +7,12 @@ import React from 'react';
 import './cart-item.scss';
 
 const CartItemDown = ({ 
-  shopItemDown: { name, price, imageUrl, ItemQuantity } 
+  shopItem: { name, price, imageUrl, ItemQuantity } 
 }) => (
     <div className='cart-item'>
-      <img src={imageUrl} alt='shop-item'/> 
+      <div className='img-col'>
+        <img src={imageUrl} alt='shop-item'/> 
+      </div>
 
       <div className='item-details'>
         <span className='name'>{name}</span>
